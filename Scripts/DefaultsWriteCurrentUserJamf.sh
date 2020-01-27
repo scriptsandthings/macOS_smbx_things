@@ -43,9 +43,9 @@ CurrentUser=`stat -f "%Su" /dev/console`
 DateStamp=$(date +"%m.%d.%Y")
 #
 # Current date and time to seconds
-# $ Date time stamp - 01-26-2020_09:53:52
+# $ Date time stamp - 01.26.2020_09.53.52
 # echo "Date time stamp - $DateTimeStamp"
-DateTimeStamp=$(date "+%m-%d-%Y_%H.%M.%S")
+DateTimeStamp=$(date "+%m.%d.%Y_%H.%M.%S")
 #
 # Backup $TargetFileFull name
 BackupFileExt="backup.$CurrentUser.$DateTimeStamp.plist"
