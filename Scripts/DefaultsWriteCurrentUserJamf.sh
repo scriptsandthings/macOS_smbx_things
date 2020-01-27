@@ -2,7 +2,6 @@
 #
 # Greg Knackstedt
 # gmknacks(AT)gmail.com
-# 1.26.2020 - 9:40pm
 #
 # DefaultsWriteCurrentUserJamf.sh
 #
@@ -21,7 +20,7 @@
 #
 # $4 - Define path to directory containing .plist within the user directory
 # Do not include an opening / or trailing / in the path
-# Example: Preferences/Microsoft
+# Example: Preferences
 #
 # $5 - Define .plist file to target
 # You use the full file name including the file extension
@@ -40,7 +39,7 @@ CurrentUser=`stat -f "%Su" /dev/console`
 #
 # Current date
 # echo "Date stamp - $DateStamp"
-# $ Date stamp - 01_26_2020
+# $ Date stamp - 01.26.2020
 DateStamp=$(date +"%m.%d.%Y")
 #
 # Current date and time to seconds
