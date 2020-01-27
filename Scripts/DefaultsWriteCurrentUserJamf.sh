@@ -2,7 +2,7 @@
 #
 # Greg Knackstedt
 # gmknacks(AT)gmail.com
-# 1.26.2020 - 8:30pm
+# 1.26.2020 - 9:40pm
 #
 # DefaultsWriteCurrentUserJamf.sh
 #
@@ -33,27 +33,43 @@
 # $7 - Define value to set for the string
 # Example: true
 #
-################ Variables ################
+################ Default Variable Declaration ################
 #
 # Identify currently logged in user
 CurrentUser=`stat -f "%Su" /dev/console`
 #
+# Current date
+# echo "Date stamp - $DateStamp"
+# $ Date stamp - 01_26_2020
+DateStamp=$(date +"%m.%d.%Y")
+#
+# Current date and time to seconds
+# $ Date time stamp - 01-26-2020_09:53:52
+# echo "Date time stamp - $DateTimeStamp"
+DateTimeStamp=$(date "+%m-%d-%Y_%H.%M.%S")
+#
+# Backup $TargetFileFull name
+BackupFileExt="backup.$CurrentUser.$DateTimeStamp.plist"
+#
+# Where to place backups
+BackupDir="/Users/Shared/bin/Backup"
+#
 # Define the current user's home directory
-UserHome=/Users/$CurrentUser
+UserHome="/Users/$CurrentUser"
 #
 # Define current user's /Library/Preferences/ folder
-UserLib=$UserHome/Library/
+UserLib="$UserHome/Library"
 #
 # Define path to directory containing .plist within the user directory
 # Example: Preferences/Microsoft
-PlistDir=$4
+PlistDir="$4/"
 #
 # Define .plist file to target
 # Example: com.apple.desktopservices.plist
-TargetPlist=$5
+TargetFileName=$5
 #
 # Combine above to define the full path to the target plist for current console UserDefaultsWrite
-UserPlist=$UserLib/$PlistDir/$TargetPlist
+TargetFileFull="$UserLib/$PlistDir/$TargetFileName"
 #
 # Define string to target with defaults write
 # Example: DSDontWriteNetworkStores
@@ -64,16 +80,27 @@ TargetStringValue=$7
 #
 ################ Functions ################
 #
+# Make a local backup of the target TargetFileFull to BackupDir
+function MakeBackup
+	{
+		echo "------------------------"
+		echo "Making backup copy of $TargetFileName."
+		echo "The backup will be saved here:"
+		echo "$BackupDir/$TargetFileName.$BackupFileExt"
+		echo ""
+		ditto "$TargetFileFull" "$BackupDir"/"$TargetFileName"."$BackupFileExt"
+	}
+#
 # Call defaults write to apply the defined value to the defined string in the targeted .plist for current user
 function UserDefaultsWrite
 	{
-		defaults write $UserPlist $TargetString $TargetStringValue
+		defaults write $TargetFileFull $TargetString $TargetStringValue
 	}
 #
 # Set ownership of plist to $CurrentUser:staff
 function RepairOwnership
 	{
-		chown -Rf $CurrentUser:staff $UserPlist
+		chown -Rf $CurrentUser:staff $TargetFileFull
 	}
 #
 # Restart services for CFPreferences and NSUserDefaults
@@ -84,6 +111,7 @@ function ApplyChange
 #
 ################ Script ################
 #
+MakeBackup
 UserDefaultsWrite
 RepairOwnership
 ApplyChange
