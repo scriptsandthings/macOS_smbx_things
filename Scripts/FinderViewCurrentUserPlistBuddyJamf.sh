@@ -2,7 +2,6 @@
 #
 # Greg Knackstedt
 # gmknacks(AT)gmail.com
-# 1.26.2020 - 8:30pm
 #
 # FinderViewCurrentUserPlistBuddyJamf.sh
 #
