@@ -1,7 +1,9 @@
 # macOS_smbx
 Apple macOS smbx information
 
-Things that might make smbx suck a little less and scripts to deploy them
+Things that might make smbx suck a little less and scripts to deploy them.
+
+Each one of the items in this document can be deployed with one of the scripts in the Scripts directory of this reposatory.
 
 ## DO NOT TEST IN PRODUCTION
 
