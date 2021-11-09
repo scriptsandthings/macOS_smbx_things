@@ -86,3 +86,30 @@ There are four options in macOS for setting the characteristics of delayed_ack:
 - delayed_ack=3: Should auto detect when to employ delayed ack; 3 packets per ack
 
 The default setting for macOS clients is delayed_ack=3. However, testing has shown that in some environments — particularly where the client is reading and writing simultaneously (such as what happens when an application is rendering a video sequence) — changing the setting to delayed_ack=0 significantly improves performance. It should be noted that environments vary, and that the settings should be tested in each environment. Sometimes, a setting of delayed_ack=1 or delayed_ack=2 will work best. It is important to also understand the impact of the change on other parts of the system.
+
+## Configure SMB Multichannel behavior - macOS 11.3+
+
+https://support.apple.com/en-us/HT212277
+
+### SMB Multichannel allows macOS to establish more than one connection to an SMB server, increase transfer speeds, and provide redundancy. The server must support SMB Multichannel to use any of these features.
+
+To enable redundancy, you should enable more than one network connection that allows connectivity to the SMB server. When SMB Multichannel is enabled, and more than one network is available, macOS prefers the network that advertises itself to be the fastest. For macOS to use multiple connections simultaneously for faster transfer rates, the interfaces must have the same speeds enabled.
+
+If you want to fully disable SMB Multichannel support in macOS, add the following line to the /etc/nsmb.conf file:
+
+mc_on=no
+
+Some Wi-Fi networks advertise faster speeds than the connected wired network. If you want to leave SMB Multichannel enabled and use Wi-Fi only as a failover for redundancy, because you prefer wired connections, add the following line to the /etc/nsmb.conf file:
+
+mc_prefer_wired=yes
+
+The /etc/nsmb.conf file doesn't exist by default. To create one and apply both of the above changes, use the following Terminal commands:
+
+echo "[default]" | sudo tee -a /etc/nsmb.conf
+echo "mc_on=no" | sudo tee -a /etc/nsmb.conf
+echo "mc_prefer_wired=yes" | sudo tee -a /etc/nsmb.conf
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
+
+For more information about the SMB Multichannel options supported on the active network, run the following Terminal command:
+smbutil multichannel
