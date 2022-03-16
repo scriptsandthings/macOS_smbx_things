@@ -1,3 +1,6 @@
+#### Edit 3.15.22
+Will be reviewing this soon and making updates for Monterey as well as fixing invalid links if I can find replacements. 
+
 # macOS_smbx
 Apple macOS smbx information
 
