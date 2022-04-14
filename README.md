@@ -57,21 +57,40 @@ https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h176
 
 In situations where proper network credentials are not working from macOS systems running version 10.13+, disabling SMB session signing may resolve the issue. Similar to disabling SMB signing, this reduces the security of an SMB connection and is recommended on systems running on private, secure networks.
 
-## Disable writing of .DS_Store files to network shares
+## Disable writing of .DS_Store files to network shares - Configure Finder to gather all metadata before displaying content - macOS 10.13+
 
 https://support.apple.com/en-us/HT208209
 
-https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 8
+https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 11
 
-### Speeds up SMB file browsing by preventing macOS from reading .DS_Store files on SMB shares. This makes the Finder use only basic information to immediately display each folder's contents in alphanumeric order.
-
-## Configure Finder to gather all metadata before displaying content - macOS 10.13+
+Speeds up SMB file browsing by preventing macOS from reading .DS_Store files on SMB shares. This makes the Finder use only basic information to immediately display each folder's contents in alphanumeric order.
 
 https://support.apple.com/en-us/HT208209
 
-https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 8
+https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 11
 
-### Configure the Finder in macOS 10.13 High Sierra and later to always collect complete metadata before displaying folder contents, matching the file browsing behavior of macOS 10.12 Sierra and earlier.
+Configures the Finder in macOS 10.13 High Sierra and later to always collect complete metadata before displaying folder contents, matching the file browsing behavior of macOS 10.12 Sierra and earlier.
+
+Speeds up SMB file browsing by preventing macOS from reading .DS_Store files on SMB shares. This makes the Finder use only basic information to immediately display each folder's contents in alphanumeric order.
+
+The macOS Finder automatically creates .DS_Store files in every folder it accesses. This file stores
+metadata about how to display that directory’s contents. The reading and writing of these files can slow down
+performance when listing the contents of directories with high file counts.
+It is possible to prevent macOS from creating .DS_Store files on network shares in macOS 10.13. As of
+macOS 10.14, it is no longer possible to stop these files from being created on network shares. However, it is
+possible to prevent macOS from reading the .DS_Store file before listing a directory’s contents. In the
+absence of a .DS_Store file or if reading the .DS_Store file is suppressed (as in 10.14 and higher),
+macOS will list the contents of a folder in alphanumeric order only upon initial open. Listing folders in this way
+has been shown to significantly reduce the time it takes for macOS to display the contents of directories with
+large numbers of files, such as those containing image sequences.
+
+The following macOS CLI command prevents macOS 10.14 and higher from reading .DS_Store files on
+network shares:
+
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+
+After running this command, the user will need to log out and log in for the changes to take effect.
+For more information about .DS_Store files, see the .DS_Store Wikipedia article. 
 
 ## TCP delayed acknowledgement (delayed_ack)
 
