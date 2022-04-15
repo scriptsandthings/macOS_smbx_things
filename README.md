@@ -63,8 +63,9 @@ To disable SMB signing on macOS, add the following entry to /etc/nsmb.conf:
 
 signing_required=no
 
-After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the
-changes to take effect.
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 
 # Disable SMB session signing - macOS 10.13+ and SMB3
 
@@ -81,6 +82,9 @@ Add the following line to the /etc/nsmb.conf file:
 validate_neg_off=yes
 
 After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
+
 
 # Prevent macOS from reading .DS_Store files on network shares - Disable directory caching - macOS 10.13+
 
@@ -161,11 +165,13 @@ net.inet.tcp.delayed_ack: 3 -> 0
 
 To make the setting persist over a reboot (in macOS 10.14 and 10.15), edit the /etc/sysctl.conf file on the macOS client:
 
-- Create or edit the file at /etc/sysctl.conf
+Add the following line to the file at /etc/sysctl.conf:
 
-- Add the following line:
+net.inet.tcp.delayed_ack=0
 
- net.inet.tcp.delayed_ack=0
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 
 # Configure SMB Multichannel behavior - macOS 11.3+
 
@@ -190,6 +196,8 @@ The /etc/nsmb.conf file doesn't exist by default. To create one and apply both o
 echo "[default]" | sudo tee -a /etc/nsmb.conf
 echo "mc_on=no" | sudo tee -a /etc/nsmb.conf
 echo "mc_prefer_wired=yes" | sudo tee -a /etc/nsmb.conf
+
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
 
 To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 
