@@ -223,3 +223,36 @@ To disable SMB notification, add the following line to the /etc/nsmb.conf file:
 notify_off=yes
 
 After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+# Force SMB protocol version
+
+https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 14 as of 4.22
+
+Under certain circumstances, it may be desirable to force macOS to connect through a particular version of
+SMB. 
+
+Note: macOS uses a binary bitmap to specify which version of SMB to use. 
+
+Add protocol_vers_map= and the appropriate value to force protocol types. See the following examples.
+
+Protocol version is specified using binary bitmap
+
+1 => 0001 => SMB 1 only
+
+2 => 0010 => SMB 2 only
+
+3 => 0011 => SMB 1 or 2
+
+4 => 0100 => SMB 3 only
+
+6 => 0110 => SMB 2 or 3
+
+To Force SMB 3 only:
+
+protocol_vers_map=4
+
+To Force SMB 2 or 3 only
+
+protocol_vers_map=6
+
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
