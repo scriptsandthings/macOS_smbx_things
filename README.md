@@ -1,8 +1,12 @@
 
 # macOS_smbx
+
 ## Apple macOS smbx information
+
 Greg Knackstedt
+
 Created 1.2020
+
 Updated 4.2022
 
 ##### Things that might make smbx suck a little less and some scripts to help deploy them.
@@ -23,9 +27,13 @@ I hate to throw a [google search link here](https://www.google.com/search?q=mac+
 ### Having previews enabled for files and icons in different Finder view settings can result in file lock/permissions errors for all other users on the same share. This is a result of the interaction between the way macOS generates the preview and the status that sets on the file.
 
 Set the cover-flow preview setting to off
+
 Set the icon preview setting to off
+
 Set the list icon preview setting to off
+
 Set the column icon preview setting to off
+
 Set the column preview column setting to off
 
 # Disable SMB packet signing - macOS 10.13.3 and earlier
