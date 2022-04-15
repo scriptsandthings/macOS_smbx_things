@@ -256,3 +256,5 @@ To Force SMB 2 or 3 only
 protocol_vers_map=6
 
 After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
