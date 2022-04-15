@@ -76,6 +76,12 @@ https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h176
 
 In situations where proper network credentials are not working from macOS systems running version 10.13+, disabling SMB session signing may resolve the issue. Similar to disabling SMB signing, this reduces the security of an SMB connection and is recommended on systems running on private, secure networks.
 
+Add the following line to the /etc/nsmb.conf file:
+
+validate_neg_off=yes
+
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
 # Prevent macOS from reading .DS_Store files on network shares - Disable directory caching - macOS 10.13+
 
 https://support.apple.com/en-us/HT208209
@@ -95,14 +101,14 @@ macOS will list the contents of a folder in alphanumeric order only upon initial
 has been shown to significantly reduce the time it takes for macOS to display the contents of directories with
 large numbers of files, such as those containing image sequences.
 
-The following macOS CLI command prevents macOS 10.14 and higher from reading .DS_Store files on
-network shares:
+The following macOS CLI command prevents macOS 10.14 and higher from reading .DS_Store files on network shares:
 
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 
 Note: This same command works on macOS 10.13 and earlier, it just actually disables the .DS_Store file creation.
 
 After running this command, the user will need to log out and log in for the changes to take effect.
+
 For more information about .DS_Store files, see the [.DS_Store Wikipedia article.](https://en.wikipedia.org/wiki/.DS_Store) 
 
 # TCP delayed acknowledgement (delayed_ack)
