@@ -120,7 +120,15 @@ There are four options in macOS for setting the characteristics of delayed_ack:
 - delayed_ack=2: Immediate ack after 2nd packet; 2 packets per ack (Compatibility Mode)
 - delayed_ack=3: Should auto detect when to employ delayed ack; 3 packets per ack
 
-The default setting for macOS clients is delayed_ack=3. However, testing has shown that in some environments — particularly where the client is reading and writing simultaneously (such as what happens when an application is rendering a video sequence) — changing the setting to delayed_ack=0 significantly improves performance. It should be noted that environments vary, and that the settings should be tested in each environment. Sometimes, a setting of delayed_ack=1 or delayed_ack=2 will work best. It is important to also understand the impact of the change on other parts of the system.
+The default setting for macOS clients is delayed_ack=3. 
+
+However, testing has shown that in some environments — particularly where the client is reading and writing simultaneously (such as what happens when an application is rendering a video sequence) — changing the setting to delayed_ack=0 significantly improves performance.
+
+It should be noted that environments vary, and that the settings should be tested in each environment. 
+
+Sometimes, a setting of delayed_ack=1 or delayed_ack=2 will work best. 
+
+It is important to also understand the impact of the change on other parts of the system.
 
 # Configure SMB Multichannel behavior - macOS 11.3+
 
