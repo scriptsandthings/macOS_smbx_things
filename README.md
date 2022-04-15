@@ -212,6 +212,8 @@ To avoid this behavior, it is possible to disable the Finder from requesting SMB
 
 # SMB change notifications
 
+#### NOT suggested
+
 https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 13 as of 4.22
 
 Applying this setting can break workflows that require SMB notifications for folder listings to be current. For example, the collaborative Productions feature in Adobe™ Premiere Pro™ relies on change notifications to be active on all clients participating in the Production. Disabling change notifications can also lead to data corruption and other issues where multiple users are accessing the same files and directories.
