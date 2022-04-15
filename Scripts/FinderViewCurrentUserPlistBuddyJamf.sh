@@ -2,11 +2,11 @@
 #
 # Greg Knackstedt
 # gmknacks(AT)gmail.com
+# https://github.com/scriptsandthings/
 #
-# FinderViewCurrentUserPlistBuddyJamf.sh
+# FinderViewCurrentUserPlistBuddy_Jamf.sh
 #
-# This script does the opposite of the following.
-# It enables preview for all Finder view modes for the currently logged in user.
+# Based on Jamf Script option $4 and a value of "true" or "false" the following is set:
 #
 # To improve SMB performance in macOS,
 # it is recommended to disable file and icon previews in Finder.
