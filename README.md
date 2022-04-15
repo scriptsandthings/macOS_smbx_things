@@ -44,10 +44,26 @@ https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h176
 
 ### In macOS 10.13.4 and later, packet signing is off by default. Packet signing for SMB 2 or SMB 3 connections turns on automatically when needed if the server offers it. The instructions in this article apply to macOS 10.13.3 and earlier. When using an SMB 2 or SMB 3 connection, packet signing is turned on by default.
 
+##### However, the extra overhead of packet signing can cause significant performance degradation on the latency-sensitive,
+high-performance workloads common to network shares used in design heavy workflows.
+
 You might want to turn off packet signing if:
-- Performance decreases when you connect to a third### party server.
+- Performance decreases when you connect to a third party server.
 - You can’t connect to a server that doesn’t support packet signing.
-- You can’t connect a third### party device to your macOS SMB server.
+- You can’t connect a third party device to your macOS SMB server.
+
+Given the inconsistent nature of the SMB signing behavior in macOS it is recommended to manually disable
+the feature using the /etc/nsmb.conf file.
+
+Apple outlines disabling SMB signing in the archived support article [Turn off packet signing for SMB 2 and SMB 3
+connections](https://support.apple.com/en-us/HT205926).
+
+To disable SMB signing on macOS, add the following entry to /etc/nsmb.conf:
+
+signing_required=no
+
+After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the
+changes to take effect.
 
 # Disable SMB session signing - macOS 10.13+ and SMB3
 
