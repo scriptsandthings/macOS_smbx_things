@@ -126,7 +126,14 @@ There are four options in macOS for setting the characteristics of delayed_ack:
 - delayed_ack=2: Immediate ack after 2nd packet; 2 packets per ack (Compatibility Mode)
 - delayed_ack=3: Should auto detect when to employ delayed ack; 3 packets per ack
 
-The default setting for macOS clients is delayed_ack=3. 
+The default setting for macOS 10.14 and 10.15 is delayed_ack=3. 
+
+Testing has shown that in some environments, particularly where the client is reading and writing simultaneously, delayed_ack=0 is typically
+the ideal value. Rendering a video sequence is an example of such behavior.
+
+In macOS 11, the default value is delayed_ack=0.
+
+While it is possible to temporarily change this value with the below sysctl -w command, the change does not persist across reboots. Values set for delayed_ack in the sysctl.conf file are ignored in macOS 11. Thus it would appear that Apple has settled on delayed_ack=0 as being the ideal value.
 
 However, testing has shown that in some environments — particularly where the client is reading and writing simultaneously (such as what happens when an application is rendering a video sequence) — changing the setting to delayed_ack=0 significantly improves performance.
 
@@ -135,6 +142,30 @@ It should be noted that environments vary, and that the settings should be teste
 Sometimes, a setting of delayed_ack=1 or delayed_ack=2 will work best. 
 
 It is important to also understand the impact of the change on other parts of the system.
+
+To query the current setting of the client, enter the following at the macOS command line:
+
+$ sudo sysctl net.inet.tcp.delayed_ack
+
+Example response:
+
+net.inet.tcp.delayed_ack: 3
+
+To change this setting, enter the following at the macOS command line:
+
+$ sudo sysctl -w net.inet.tcp.delayed_ack=0
+
+Example response:
+
+net.inet.tcp.delayed_ack: 3 -> 0
+
+To make the setting persist over a reboot (in macOS 10.14 and 10.15), edit the /etc/sysctl.conf file on the macOS client:
+
+- Create or edit the file at /etc/sysctl.conf
+
+- Add the following line:
+
+ net.inet.tcp.delayed_ack=0
 
 # Configure SMB Multichannel behavior - macOS 11.3+
 
