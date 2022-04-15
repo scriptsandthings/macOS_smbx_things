@@ -11,11 +11,12 @@ Updated 4.2022
 
 ##### Things that might make smbx suck a little less and some scripts to help deploy them.
 
+
+This is a compilation of data from Apple, multiple storage vendors, and the internet at large, of various issues and workarounds to make Apple's smbx implementation play a little nicer.
+
 Each one of the items in this document can be deployed with one of the scripts in the [in the Scripts directory](https://github.com/scriptsandthings/macOS_smbx_things/tree/master/Scripts) of this reposatory.
 
 # Always test before using, never test in prod, use these at your own risk.
-
-This is a compilation of data from Apple, multiple storage vendors, and the internet at large, of various issues and workarounds to make Apple's smbx implementation play a little nicer.
 
 # Disable file and icon previews in Finder
 
