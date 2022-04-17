@@ -22,7 +22,7 @@
 ################ Variables ################
 #
 # Identify currently logged in user
-CurrentUser=`stat -f "%Su" /dev/console`
+CurrentUser=$(/usr/sbin/scutil <<< "show State:/Users/ConsoleUser" | /usr/bin/awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}')
 # Set location of PlistBuddy
 PlistBuddy=/usr/libexec/PlistBuddy
 # Set location of current users com.apple.finder.plist
