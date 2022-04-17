@@ -204,17 +204,17 @@ To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 For more information about the SMB Multichannel options supported on the active network, run the following Terminal command:
 smbutil multichannel
 
-The SMB server provides macOS with updates or changes to mounted file shares. 
-
-With a busy file share, this may result in the macOS Finder refreshing itself frequently and users may notice their file listings fluctuating or Finder windows reset to the top level directory while browsing. 
-
-To avoid this behavior, it is possible to disable the Finder from requesting SMB change notifications.
-
 # SMB change notifications
 
 #### NOT suggested
 
 https://www.dellemc.com/resources/en-us/asset/white-papers/products/storage/h17613_wp_isilon_mac_os_performance_optimization.pdf - Page 13 as of 4.22
+
+The SMB server provides macOS with updates or changes to mounted file shares. 
+
+With a busy file share, this may result in the macOS Finder refreshing itself frequently and users may notice their file listings fluctuating or Finder windows reset to the top level directory while browsing. 
+
+To avoid this behavior, it is possible to disable the Finder from requesting SMB change notifications.
 
 Applying this setting can break workflows that require SMB notifications for folder listings to be current. For example, the collaborative Productions feature in Adobe™ Premiere Pro™ relies on change notifications to be active on all clients participating in the Production. Disabling change notifications can also lead to data corruption and other issues where multiple users are accessing the same files and directories.
 
