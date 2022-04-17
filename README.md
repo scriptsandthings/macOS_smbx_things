@@ -85,7 +85,6 @@ After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS sys
 
 To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 
-
 # Prevent macOS from reading .DS_Store files on network shares - Disable directory caching - macOS 10.13+
 
 https://support.apple.com/en-us/HT208209
@@ -225,6 +224,8 @@ To disable SMB notification, add the following line to the /etc/nsmb.conf file:
 notify_off=yes
 
 After updating /etc/nsmb.conf, unmount and remount SMB shares from the macOS system for the changes to take effect.
+
+To revert the above changes, you can delete the /etc/nsmb.conf file safely.
 
 # Force SMB protocol version
 
