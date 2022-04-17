@@ -2,7 +2,8 @@
 #
 # Greg Knackstedt
 # gmknacks(AT)gmail.com
-#
+# https://github.com/scriptsandthings/
+# 
 # DefaultsWriteCurrentUserJamf.sh
 #
 # For information on how to use defaults write refer to the man page
@@ -35,7 +36,7 @@
 ################ Default Variable Declaration ################
 #
 # Identify currently logged in user
-CurrentUser=`stat -f "%Su" /dev/console`
+CurrentConsoleUser=$(/usr/sbin/scutil <<< "show State:/Users/ConsoleUser" | /usr/bin/awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}')
 #
 # Current date
 # echo "Date stamp - $DateStamp"
@@ -109,6 +110,7 @@ function ApplyChange
 	}
 #
 ################ Script ################
+#
 #
 MakeBackup
 UserDefaultsWrite
