@@ -5,9 +5,9 @@
 
 Greg Knackstedt
 
-Created 1.2020
+Created: 1.2020
 
-Updated 4.2022
+Last Update: 4.2022
 
 ##### Things that might make smbx suck a little less and some scripts to help deploy them.
 
