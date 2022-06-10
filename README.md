@@ -1,5 +1,5 @@
 
-# macOS_smbx
+# macOS smbx
 
 ## Apple macOS smbx and /etc/nsmb.conf information
 
