@@ -1,7 +1,7 @@
 
-# macOS smbx
 
-## Apple macOS smbx and /etc/nsmb.conf information
+
+# Apple macOS smbx and /etc/nsmb.conf information
 
 Greg Knackstedt
 
